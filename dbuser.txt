@@ -1,5 +1,5 @@
 karl:oelschlager::non:karlkarl75000
 john:smith::non:smithhhhhhh
 mike:horn::non:ecologiiiiii
-JeanLuc:Melenchon::non:Larepubliquecestmoii
-phillipe:poutou::oui:cestlaluttefinal
+JeanLuc:Melenchon:lfi,nupes:non:Larepubliquecestmoii
+phillipe:poutou:npa:oui:cestlaluttefinal

@@ -19,12 +19,10 @@ fi
 while IFS=':' read -r prenom nom groupes sudo password; do
     username=$(echo "${prenom:0:1}${nom}" | tr '[:upper:]' '[:lower:]')
     
-    if id -u "$username" >/dev/null 2>&1; then
-        username="${username}1"
-    fi
-    
     useradd -p "$(openssl passwd -1 "$password")" -c "$prenom $nom" -m "$username"
     chage -d 0 "$username"
+
+#les groupes !!!
     
     IFS=',' read -ra GROUP <<< "$groupes"
     for i in "${GROUP[@]}"; do
@@ -34,9 +32,19 @@ while IFS=':' read -r prenom nom groupes sudo password; do
         usermod -a -G "$i" "$username"
     done
     
+
+#sudo ou non 
     if [ "$sudo" = "oui" ]; then
         usermod -aG sudo "$username"
     fi
+
+
+# création de fichiers aléatoires
+    for i in $(seq $((RANDOM%6+5))); do
+        fallocate -l $((RANDOM%46+5))M /home/"$username"/file"$i"
+    done
+
+
 
 done < "$fichier_utilisateurs"
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-# Calcul de la taille des répertoires personnels
+# Calcul de la taille
 declare -A sizes
 
 while IFS=: read -r username _; do
@@ -11,7 +11,7 @@ while IFS=: read -r username _; do
     fi
 done < <(cut -d: -f1,6 /etc/passwd)
 
-# Tri cocktail des utilisateurs en fonction de la taille
+# Tri cocktail
 tab=(${sizes[@]})
 
 echange=true
@@ -50,7 +50,7 @@ done
 
 echo "${tab[@]}"
 
-# Affichage des 5 plus gros consommateurs d'espace lors de la connexion
+# Affichage des 5 
 echo "Les 5 plus gros consommateurs d'espace disque :"
 
 for ((i = 0; i < 5 && i < ${#tab[@]}; i++)); do
@@ -61,17 +61,17 @@ for ((i = 0; i < 5 && i < ${#tab[@]}; i++)); do
     #echo "$(find /home -size ${tab[i]})"
 done
 
-# Modification du fichier .bashrc de chaque utilisateur
+# Modification du fichier .bashrc
 for username in "${tab[@]}"; do
     bashrc_file="/home/$username/.bashrc"
 
     if [[ -f "$bashrc_file" ]]; then
-        # Ajout de la commande pour afficher la taille du répertoire personnel
+        
         echo 'echo "Taille du répertoire personnel : $(du -sh ~ | cut -f1) ($(du -sB1 ~ | cut -f1) octets)"' >> "$bashrc_file"
 
-        # Vérification de la taille et ajout de l'avertissement si nécessaire
+        # Vérif de la taille
         echo 'if (( $(du -sBM ~ | cut -f1) > 100 )); then' >> "$bashrc_file"
-        echo '    echo "AVERTISSEMENT : Votre répertoire personnel occupe plus de 100 Mo." >&2' >> "$bashrc_file"
+        echo '    echo "AVERTISSEMENT : + 100 Mo." >&2' >> "$bashrc_file"
         echo 'fi' >> "$bashrc_file"
     fi
 done

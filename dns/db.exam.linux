@@ -1,0 +1,16 @@
+$TTL 86400
+@       IN      SOA     ns1.exam.linux. admin.exam.linux. (
+                        2023062501      ; numéro de série
+                        3600            ; refresh
+                        1800            ; retry
+                        604800          ; expire
+                        86400           ; minimum
+                        )
+        IN      NS      ns1.exam.linux.     ; Nom du serveur DNS maître pour la zone
+
+
+ns1	IN      A       172.16.1.129
+gateway     IN      A       172.16.1.2
+passerelle     IN      CNAME       gateway
+loopback    IN      A       127.0.0.1
+dns-secondaire	IN	A	172.16.1.133

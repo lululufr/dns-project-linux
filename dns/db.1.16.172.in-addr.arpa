@@ -1,0 +1,14 @@
+@       IN      SOA     ns1.exam.linux. admin.exam.linux. (
+                        2018040301      ; numéro de série
+                        3h              ; rafraîchissement (refresh)
+                        1h              ; tentative de réessai (retry)
+                        1w              ; expiration (expire)
+                        1h              ; TTL négatif (minimum)
+                        )
+
+@       IN      NS      ns1.exam.linux.     ; Nom du serveur DNS maître pour la zone
+
+137     IN      PTR     machine1.exam.linux.   ; Enregistrement PTR pour l'adresse I>
+
+
+

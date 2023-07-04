@@ -71,7 +71,7 @@ for username in "${tab[@]}"; do
 
         # Vérif de la taille
         echo 'if (( $(du -sBM ~ | cut -f1) > 100 )); then' >> "$bashrc_file"
-        echo '    echo "AVERTISSEMENT : + 100 Mo." >&2' >> "$bashrc_file"
+        echo '    echo "ATTENTION : + 100 Mo." >&2' >> "$bashrc_file"
         echo 'fi' >> "$bashrc_file"
     fi
 done

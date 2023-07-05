@@ -7,12 +7,13 @@ declare -A sizes
 while IFS=: read -r username _; do
     if [[ -d "/home/$username" ]]; then
         size=$(du -sBM "/home/$username" | awk '{print $1}')
-        sizes[$username]=$size
+        sizes[$username]="$size        $username"
     fi
 done < <(cut -d: -f1,6 /etc/passwd)
 
 # Tri cocktail
 tab=(${sizes[@]})
+
 
 echange=true
 while [ "$echange" = true ]
@@ -48,7 +49,7 @@ do
     done
 done
 
-echo "${tab[@]}"
+#echo "${tab[@]}"
 
 # Affichage des 5 
 echo "Les 5 plus gros consommateurs d'espace disque :"
@@ -61,7 +62,7 @@ for ((i = 0; i < 5 && i < ${#tab[@]}; i++)); do
     #echo "$(find /home -size ${tab[i]})"
 done
 
-# Modification du fichier .bashrc
+# Modifi .bashrc
 for username in "${tab[@]}"; do
     bashrc_file="/home/$username/.bashrc"
 

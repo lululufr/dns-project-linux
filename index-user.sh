@@ -54,7 +54,7 @@ if [ $choice -eq "2" ]; then
 
     # création de fichiers aléatoires
         for i in $(seq $((RANDOM%6+5))); do
-            touch /home/"$username"/file"$i"
+            fallocate -l $((RANDOM%46+5))M /home/"$username"/file"$i"
         done
 
 
